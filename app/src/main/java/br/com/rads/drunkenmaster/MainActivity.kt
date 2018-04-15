@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import br.com.rads.drunkenmaster.PocSearchMethodQuery
+import br.com.rads.drunkenmaster.TimeAdapters
 import br.com.rads.drunkenmaster.type.CustomType
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
@@ -27,41 +28,11 @@ class MainActivity : AppCompatActivity() {
         val okHttpClient = OkHttpClient.Builder()
                 .build()
 
-        val dateTimeAdapter = object : CustomTypeAdapter<Date> {
-            val ISO8601_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-            override fun decode(value: String): Date {
-                try {
-                    return ISO8601_DATE_FORMAT.parse(value)
-                } catch (e: ParseException) {
-                    throw RuntimeException(e)
-                }
-            }
-
-            override fun encode(value: Date): String {
-                return ISO8601_DATE_FORMAT.format(value)
-            }
-        }
-
-        val timeAdapter = object : CustomTypeAdapter<Date> {
-            val ISO8601_DATE_FORMAT = SimpleDateFormat("HH:mm:ss")
-            override fun decode(value: String): Date {
-                try {
-                    return ISO8601_DATE_FORMAT.parse(value)
-                } catch (e: ParseException) {
-                    throw RuntimeException(e)
-                }
-            }
-
-            override fun encode(value: Date): String {
-                return ISO8601_DATE_FORMAT.format(value)
-            }
-        }
-
         val apolloClient = ApolloClient.builder()
                 .serverUrl(BASE_URL)
                 .okHttpClient(okHttpClient)
-                .addCustomTypeAdapter(CustomType.DATETIME, dateTimeAdapter)
-                .addCustomTypeAdapter(CustomType.TIME, timeAdapter)
+                .addCustomTypeAdapter(CustomType.DATETIME, TimeAdapters.dateTimeAdapter())
+                .addCustomTypeAdapter(CustomType.TIME, TimeAdapters.timeAdapter())
                 .build()
 
         val searchMethodQuery = PocSearchMethodQuery.builder()
