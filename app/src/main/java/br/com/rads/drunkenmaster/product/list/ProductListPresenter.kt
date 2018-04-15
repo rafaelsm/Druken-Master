@@ -1,9 +1,10 @@
-package br.com.rads.drunkenmaster.productlist
+package br.com.rads.drunkenmaster.product.list
 
 import android.util.Log
 import br.com.rads.drunkenmaster.PocSearchMethodQuery
 import br.com.rads.drunkenmaster.geocode.PocAddress
 import br.com.rads.drunkenmaster.graphql.GraphqlProvider
+import br.com.rads.drunkenmaster.product.Product
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
@@ -30,8 +31,30 @@ class ProductListPresenter(private val view: ProductListContract.View)
                 Log.d("APOLLO_CALL", "deu bom")
                 val data = response.data()
                 Log.d("APOLLO_CALL", "$data")
+
+                view.showProductList(mock())
             }
         })
+    }
+
+    private fun mock(): List<Product> {
+        return listOf(
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f),
+                Product("name", "description", "url", 1.1f)
+        )
     }
 
     override fun filterProductList(pocIds: List<String>, category: String?, productName: String?) {

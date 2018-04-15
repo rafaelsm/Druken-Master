@@ -1,6 +1,7 @@
-package br.com.rads.drunkenmaster.productlist
+package br.com.rads.drunkenmaster.product.list
 
 import br.com.rads.drunkenmaster.geocode.PocAddress
+import br.com.rads.drunkenmaster.product.Product
 
 interface ProductListContract {
 
@@ -8,6 +9,7 @@ interface ProductListContract {
         fun showProgress()
         fun hideProgress()
         fun showError()
+        fun showProductList(productList: List<Product>)
     }
 
     interface Presenter {
