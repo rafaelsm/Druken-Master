@@ -70,7 +70,7 @@
                   "defaultValue": null
                 },
                 {
-                  "name": "lng",
+                  "name": "long",
                   "description": null,
                   "type": {
                     "kind": "NON_NULL",

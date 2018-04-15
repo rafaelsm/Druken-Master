@@ -1,5 +1,5 @@
 query pocSearchMethod($now: DateTime!, $algorithm: String!, $lat: String!, $lng: String!) {
-  pocSearch(now: $now, algorithm: $algorithm, lat: $lat, lng: $lng) {
+  pocSearch(now: $now, algorithm: $algorithm, lat: $lat, long: $lng) {
     __typename
     id
     status
