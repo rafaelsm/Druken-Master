@@ -1,4 +1,4 @@
-package br.com.rads.drunkenmaster
+package br.com.rads.drunkenmaster.common
 
 import android.view.View
 

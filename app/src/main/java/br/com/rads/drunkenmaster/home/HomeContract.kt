@@ -11,6 +11,7 @@ interface HomeContract {
         fun hideLoading()
         fun addressFound(addresses: List<PocAddress>)
         fun addressNotFound()
+        fun startProductListActivity(pocAddress: PocAddress)
     }
 
     interface Presenter {

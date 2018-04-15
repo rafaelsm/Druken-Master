@@ -47,6 +47,7 @@
         android:drawableStart="@drawable/ic_location_on_black_24dp"
         android:ems="10"
         android:hint="@string/hint_your_address"
+        android:imeOptions="actionDone"
         android:inputType="textPostalAddress"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"

@@ -1,4 +1,4 @@
-package br.com.rads.drunkenmaster
+package br.com.rads.drunkenmaster.common
 
 import com.apollographql.apollo.CustomTypeAdapter
 import java.text.ParseException

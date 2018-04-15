@@ -8,7 +8,8 @@ import br.com.rads.drunkenmaster.geocode.PocAddress
 import rads.com.br.drunkenmaster.R
 
 
-class AddressesAdapter(private val addresses: MutableList<PocAddress>)
+class AddressesAdapter(private val addresses: MutableList<PocAddress>,
+                       private val addressSelectedListener: AddressSelectedListener)
     : RecyclerView.Adapter<AddressesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,14 +22,22 @@ class AddressesAdapter(private val addresses: MutableList<PocAddress>)
     override fun getItemCount() = addresses.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.addressTextView.text = addresses[position].fullAddress
+        val address = addresses[position]
+        holder.addressTextView.text = address.fullAddress
+        holder.addressTextView.setOnClickListener {
+            addressSelectedListener.addressSelected(address)
+        }
     }
-
-    class ViewHolder(val addressTextView: TextView) : RecyclerView.ViewHolder(addressTextView)
 
     fun addAll(newAddresses: List<PocAddress>) {
         addresses.clear()
         addresses.addAll(newAddresses)
         notifyDataSetChanged()
+    }
+
+    class ViewHolder(val addressTextView: TextView) : RecyclerView.ViewHolder(addressTextView)
+
+    interface AddressSelectedListener {
+        fun addressSelected(pocAddress: PocAddress)
     }
 }

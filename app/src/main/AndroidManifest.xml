@@ -14,6 +14,7 @@
         <activity
             android:name="br.com.rads.drunkenmaster.home.HomeActivity"
             android:label="@string/activity_title_delivery_address"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,16 +23,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ProductListActivity"
             android:parentActivityName="br.com.rads.drunkenmaster.home.HomeActivity"
             android:screenOrientation="portrait" />
 
         <service
-            android:name=".FetchAddressIntentService"
-            android:exported="false" />
-        <service
             android:name="br.com.rads.drunkenmaster.geocode.FetchAddressIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
     </application>
 
 </manifest>

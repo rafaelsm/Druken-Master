@@ -10,7 +10,7 @@ import br.com.rads.drunkenmaster.geocode.PocAddress
 
 
 class HomePresenter(val view: HomeContract.View)
-    : HomeContract.Presenter {
+    : HomeContract.Presenter, AddressesAdapter.AddressSelectedListener {
 
     private val receiver = object : ResultReceiver(Handler()) {
         override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
@@ -31,5 +31,11 @@ class HomePresenter(val view: HomeContract.View)
 //        FetchAddressIntentService.startActionStop(view.context())
         FetchAddressIntentService.startActionSearchAddress(view.context(), address, receiver)
     }
+
+    //region Address Selected Listener
+    override fun addressSelected(pocAddress: PocAddress) {
+        view.startProductListActivity(pocAddress)
+    }
+    //endregion
 
 }
