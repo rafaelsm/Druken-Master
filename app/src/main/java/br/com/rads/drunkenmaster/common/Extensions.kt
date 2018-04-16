@@ -10,3 +10,8 @@ fun View.visible() {
 fun View.invisible() {
     this.visibility = View.INVISIBLE
 }
+
+//Float
+fun Float.toMoney(): String {
+    return "$ " + this.toString().replace(".", ",")
+}
