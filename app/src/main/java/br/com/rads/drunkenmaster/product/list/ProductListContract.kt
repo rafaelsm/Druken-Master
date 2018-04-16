@@ -9,7 +9,7 @@ interface ProductListContract {
         fun showProgress()
         fun hideProgress()
         fun showError()
-        fun showProductList(productList: List<Product>)
+        fun showProductList(productList: List<Product>?)
     }
 
     interface Presenter {

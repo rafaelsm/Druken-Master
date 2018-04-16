@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.rads.drunkenmaster.product.Product
+import kotlinx.android.synthetic.main.cell_product.view.*
 import rads.com.br.drunkenmaster.R
 
 class ProductListAdapter(val productList: MutableList<Product>)
@@ -18,7 +19,10 @@ class ProductListAdapter(val productList: MutableList<Product>)
     override fun getItemCount() = productList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        val product = productList[position]
+        holder.itemView.product_price_textView.text = product.price.toString()
+        holder.itemView.product_name_textView.text = product.name
+        holder.itemView.product_description_textView.text = product.description
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

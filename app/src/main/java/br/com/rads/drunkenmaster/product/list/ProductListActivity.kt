@@ -40,9 +40,11 @@ class ProductListActivity : AppCompatActivity(), ProductListContract.View {
     override fun showError() {
     }
 
-    override fun showProductList(productList: List<Product>) {
+    override fun showProductList(productList: List<Product>?) {
         runOnUiThread {
-            productAdapter.addAll(productList)
+            productList?.let {
+                productAdapter.addAll(it)
+            }
         }
     }
 }

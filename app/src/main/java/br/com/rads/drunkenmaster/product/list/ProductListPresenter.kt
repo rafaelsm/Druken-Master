@@ -1,63 +1,77 @@
 package br.com.rads.drunkenmaster.product.list
 
-import android.util.Log
+import br.com.rads.drunkenmaster.PocCategorySearchQuery
 import br.com.rads.drunkenmaster.PocSearchMethodQuery
 import br.com.rads.drunkenmaster.geocode.PocAddress
 import br.com.rads.drunkenmaster.graphql.GraphqlProvider
 import br.com.rads.drunkenmaster.product.Product
-import com.apollographql.apollo.ApolloCall
+import com.apollographql.apollo.ApolloQueryCall
 import com.apollographql.apollo.api.Response
-import com.apollographql.apollo.exception.ApolloException
+import com.apollographql.apollo.rx2.Rx2Apollo
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.util.*
 
 class ProductListPresenter(private val view: ProductListContract.View)
     : ProductListContract.Presenter {
 
     override fun loadProductList(pocAddress: PocAddress) {
-        val searchMethodQuery = PocSearchMethodQuery.builder()
-                .lat(pocAddress.lat.toString())
-                .lng(pocAddress.lng.toString())
-                .now(Date())
-                .algorithm("NEAREST")
-                .build()
-
-        val queryCall = GraphqlProvider.provideGraphql().query(searchMethodQuery)
-        queryCall.enqueue(object : ApolloCall.Callback<PocSearchMethodQuery.Data>() {
-            override fun onFailure(e: ApolloException) {
-                Log.e("APOLLO_CALL", "deu ruim $e")
-            }
-
-            override fun onResponse(response: Response<PocSearchMethodQuery.Data>) {
-                Log.d("APOLLO_CALL", "deu bom")
-                val data = response.data()
-                Log.d("APOLLO_CALL", "$data")
-
-                view.showProductList(mock())
-            }
-        })
+        Rx2Apollo.from(loadPoc(pocAddress))
+                .flatMap {
+                    return@flatMap searchProducts(it.data()?.pocSearch()?.get(0)?.id())
+                }
+                .flatMap {
+                    return@flatMap productsParsed(it.data()?.poc()?.products())
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            view.showProductList(it)
+                        },
+                        {
+                            view.showError()
+                        })
     }
 
-    private fun mock(): List<Product> {
-        return listOf(
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f),
-                Product("name", "description", "url", 1.1f)
-        )
+    private fun loadPoc(pocAddress: PocAddress): ApolloQueryCall<PocSearchMethodQuery.Data> {
+        return GraphqlProvider
+                .provideGraphql()
+                .query(
+                        PocSearchMethodQuery.builder()
+                                .lat(pocAddress.lat.toString())
+                                .lng(pocAddress.lng.toString())
+                                .now(Date())
+                                .algorithm("NEAREST")
+                                .build()
+                )
     }
+
+    private fun searchProducts(id: String?): Observable<Response<PocCategorySearchQuery.Data>> {
+        return if (id != null) {
+            Rx2Apollo.from(GraphqlProvider
+                    .provideGraphql()
+                    .query(PocCategorySearchQuery
+                            .builder()
+                            .id(id)
+                            .search("")
+                            .categoryId(0)
+                            .build()
+                    )
+            )
+        } else {
+            Observable.empty()
+        }
+    }
+
+    private fun productsParsed(products: List<PocCategorySearchQuery.Product>?) =
+            Observable.just(products?.map {
+                Product.from(it)
+            })
 
     override fun filterProductList(pocIds: List<String>, category: String?, productName: String?) {
 
     }
+
 }
