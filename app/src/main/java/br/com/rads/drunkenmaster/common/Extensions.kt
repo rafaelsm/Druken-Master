@@ -13,5 +13,9 @@ fun View.invisible() {
 
 //Float
 fun Float.toMoney(): String {
-    return "$ " + this.toString().replace(".", ",")
+    return if (this <= 0.0) {
+        "$ - "
+    } else {
+        "$ " + this.toString().replace(".", ",")
+    }
 }

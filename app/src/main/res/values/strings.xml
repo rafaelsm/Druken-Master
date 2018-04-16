@@ -2,4 +2,7 @@
     <string name="app_name">Drunken Master</string>
     <string name="activity_title_delivery_address">Delivery address</string>
     <string name="hint_your_address">Your address</string>
+    <string name="label_description">Description</string>
+    <string name="activity_title_product_detail">Product Detail</string>
+    <string name="unavailable">Não disponível</string>
 </resources>

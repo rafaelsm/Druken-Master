@@ -1,21 +1,21 @@
-package rads.com.br.drunkenmaster
+package br.com.rads.drunkenmaster.product.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import br.com.rads.drunkenmaster.common.Extras
 import br.com.rads.drunkenmaster.geocode.PocAddress
 import br.com.rads.drunkenmaster.product.Product
-import br.com.rads.drunkenmaster.product.list.ProductListAdapter
-import br.com.rads.drunkenmaster.product.list.ProductListContract
-import br.com.rads.drunkenmaster.product.list.ProductListPresenter
+import br.com.rads.drunkenmaster.product.detail.ProductDetailActivity
 import kotlinx.android.synthetic.main.activity_product_list.*
+import rads.com.br.drunkenmaster.R
 
 
 class ProductListActivity : AppCompatActivity(), ProductListContract.View {
 
     private val presenter = ProductListPresenter(this)
-    private val productAdapter = ProductListAdapter(mutableListOf())
+    private val productAdapter = ProductListAdapter(mutableListOf(), presenter)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,5 +46,10 @@ class ProductListActivity : AppCompatActivity(), ProductListContract.View {
                 productAdapter.addAll(it)
             }
         }
+    }
+
+    override fun startProductDetailActivity(product: Product) {
+        startActivity(Intent(this@ProductListActivity, ProductDetailActivity::class.java)
+                .putExtra(Extras.PRODUCT_EXTRA, product))
     }
 }

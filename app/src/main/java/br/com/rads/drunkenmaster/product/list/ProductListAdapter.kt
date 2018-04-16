@@ -10,7 +10,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cell_product.view.*
 import rads.com.br.drunkenmaster.R
 
-class ProductListAdapter(val productList: MutableList<Product>)
+class ProductListAdapter(private val productList: MutableList<Product>,
+                         private val productSelectedListener: ProductSelectedListener)
     : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,13 +30,21 @@ class ProductListAdapter(val productList: MutableList<Product>)
                 .load(product.imageUrl)
                 .placeholder(R.mipmap.ic_launcher)
                 .into(holder.itemView.imageView)
-    }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+        holder.itemView.setOnClickListener {
+            productSelectedListener.productSelected(product)
+        }
+    }
 
     fun addAll(newProductList: List<Product>) {
         productList.clear()
         productList.addAll(newProductList)
         notifyDataSetChanged()
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    interface ProductSelectedListener {
+        fun productSelected(product: Product)
     }
 }

@@ -13,7 +13,7 @@ import br.com.rads.drunkenmaster.common.visible
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_delivery_address.*
-import rads.com.br.drunkenmaster.ProductListActivity
+import br.com.rads.drunkenmaster.product.list.ProductListActivity
 import rads.com.br.drunkenmaster.R
 import java.util.concurrent.TimeUnit
 

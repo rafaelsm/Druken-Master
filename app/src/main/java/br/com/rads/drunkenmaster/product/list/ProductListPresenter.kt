@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import java.util.*
 
 class ProductListPresenter(private val view: ProductListContract.View)
-    : ProductListContract.Presenter {
+    : ProductListContract.Presenter, ProductListAdapter.ProductSelectedListener {
 
     override fun loadProductList(pocAddress: PocAddress) {
         Rx2Apollo.from(loadPoc(pocAddress))
@@ -73,5 +73,11 @@ class ProductListPresenter(private val view: ProductListContract.View)
     override fun filterProductList(pocIds: List<String>, category: String?, productName: String?) {
 
     }
+
+    //region ProductSelectedListener
+    override fun productSelected(product: Product) {
+        view.startProductDetailActivity(product)
+    }
+    //endregion
 
 }
