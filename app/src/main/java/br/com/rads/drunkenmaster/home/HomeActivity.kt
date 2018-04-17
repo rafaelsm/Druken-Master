@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
+import android.widget.Toast
 import br.com.rads.drunkenmaster.common.Extras
 import br.com.rads.drunkenmaster.geocode.PocAddress
 import br.com.rads.drunkenmaster.common.invisible
@@ -48,7 +49,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     override fun hideLoading() = progressBar2.invisible()
 
     override fun addressNotFound() {
-
+        Toast.makeText(this, "Address not found", Toast.LENGTH_LONG).show()
     }
 
     override fun addressFound(addresses: List<PocAddress>) {
