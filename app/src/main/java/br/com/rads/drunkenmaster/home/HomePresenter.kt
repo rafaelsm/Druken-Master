@@ -1,13 +1,10 @@
 package br.com.rads.drunkenmaster.home
 
-import android.content.Context
-import android.location.Geocoder
 import android.os.Bundle
 import android.os.Handler
 import android.os.ResultReceiver
 import br.com.rads.drunkenmaster.geocode.FetchAddressIntentService
 import br.com.rads.drunkenmaster.geocode.PocAddress
-
 
 class HomePresenter(val view: HomeContract.View)
     : HomeContract.Presenter, AddressesAdapter.AddressSelectedListener {
@@ -28,7 +25,6 @@ class HomePresenter(val view: HomeContract.View)
 
     override fun searchAddress(address: String) {
         view.showLoading()
-//        FetchAddressIntentService.startActionStop(view.context())
         FetchAddressIntentService.startActionSearchAddress(view.context(), address, receiver)
     }
 

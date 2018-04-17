@@ -1,8 +1,8 @@
 package br.com.rads.drunkenmaster.geocode
 
 import android.app.IntentService
-import android.content.Intent
 import android.content.Context
+import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
@@ -77,10 +77,5 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentService") {
                             .putExtra(RECEIVER_EXTRA, receiver))
         }
 
-        fun startActionStop(context: Context) {
-            context
-                    .startService(Intent(context, FetchAddressIntentService::class.java)
-                            .setAction(ACTION_STOP))
-        }
     }
 }
