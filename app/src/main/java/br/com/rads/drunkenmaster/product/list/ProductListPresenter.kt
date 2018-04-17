@@ -28,9 +28,11 @@ class ProductListPresenter(private val view: ProductListContract.View)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {
+                            view.hideProgress()
                             view.showProductList(it)
                         },
                         {
+                            view.hideProgress()
                             view.showError()
                         })
     }

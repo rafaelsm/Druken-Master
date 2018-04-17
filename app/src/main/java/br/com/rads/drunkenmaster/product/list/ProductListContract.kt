@@ -6,7 +6,6 @@ import br.com.rads.drunkenmaster.product.Product
 interface ProductListContract {
 
     interface View {
-        fun showProgress()
         fun hideProgress()
         fun showError()
         fun showProductList(productList: List<Product>?)

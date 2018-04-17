@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import br.com.rads.drunkenmaster.common.Extras
+import br.com.rads.drunkenmaster.common.invisible
+import br.com.rads.drunkenmaster.common.visible
 import br.com.rads.drunkenmaster.geocode.PocAddress
 import br.com.rads.drunkenmaster.product.Product
 import br.com.rads.drunkenmaster.product.detail.ProductDetailActivity
@@ -12,7 +14,8 @@ import kotlinx.android.synthetic.main.activity_product_list.*
 import rads.com.br.drunkenmaster.R
 
 
-class ProductListActivity : AppCompatActivity(), ProductListContract.View {
+class ProductListActivity : AppCompatActivity(),
+        ProductListContract.View {
 
     private val presenter = ProductListPresenter(this)
     private val productAdapter = ProductListAdapter(mutableListOf(), presenter)
@@ -31,13 +34,12 @@ class ProductListActivity : AppCompatActivity(), ProductListContract.View {
         }
     }
 
-    override fun showProgress() {
-    }
-
     override fun hideProgress() {
+        product_list_progressBar.invisible()
     }
 
     override fun showError() {
+        error_textView.visible()
     }
 
     override fun showProductList(productList: List<Product>?) {
