@@ -17,7 +17,7 @@ import rads.com.br.drunkenmaster.R
 class ProductListActivity : AppCompatActivity(),
         ProductListContract.View {
 
-    private val presenter = ProductListPresenter(this)
+    private val presenter = ProductListPresenter(this, ProductListServiceImpl())
     private val productAdapter = ProductListAdapter(mutableListOf(), presenter)
 
     override fun onCreate(savedInstanceState: Bundle?) {

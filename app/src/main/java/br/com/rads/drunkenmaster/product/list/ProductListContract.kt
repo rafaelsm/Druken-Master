@@ -14,7 +14,6 @@ interface ProductListContract {
 
     interface Presenter {
         fun loadProductList(pocAddress: PocAddress)
-        fun filterProductList(pocIds: List<String>, category: String?, productName: String?)
     }
 
 }
