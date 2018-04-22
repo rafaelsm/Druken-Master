@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTitle(R.string.activity_title_delivery_address)
+        setTitle(R.string.activity_title_home)
         setContentView(R.layout.activity_delivery_address)
 
         recyclerView.apply {
@@ -51,7 +51,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     override fun hideLoading() = search_address_progressBar.invisible()
 
     override fun addressNotFound() {
-        Toast.makeText(this, "Address not found", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, R.string.error_toast_address_not_found, Toast.LENGTH_LONG).show()
     }
 
     override fun addressFound(addresses: List<PocAddress>) {

@@ -36,7 +36,7 @@
         android:id="@+id/error_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delivery not found :("
+        android:text="@string/error_label_delivery_not_found"
         android:textSize="22sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
