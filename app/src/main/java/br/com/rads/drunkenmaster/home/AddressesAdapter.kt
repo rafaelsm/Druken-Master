@@ -23,9 +23,11 @@ class AddressesAdapter(private val addresses: MutableList<PocAddress>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val address = addresses[position]
-        holder.addressTextView.text = address.fullAddress
-        holder.addressTextView.setOnClickListener {
-            addressSelectedListener.addressSelected(address)
+        with(holder.addressTextView) {
+            text = address.fullAddress
+            setOnClickListener {
+                addressSelectedListener.addressSelected(address)
+            }
         }
     }
 

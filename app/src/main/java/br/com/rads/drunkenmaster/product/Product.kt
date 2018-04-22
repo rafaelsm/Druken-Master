@@ -3,7 +3,6 @@ package br.com.rads.drunkenmaster.product
 import android.os.Parcel
 import android.os.Parcelable
 import br.com.rads.drunkenmaster.PocCategorySearchQuery
-import br.com.rads.drunkenmaster.PocSearchMethodQuery
 
 data class Product(val name: String,
                    val description: String,
