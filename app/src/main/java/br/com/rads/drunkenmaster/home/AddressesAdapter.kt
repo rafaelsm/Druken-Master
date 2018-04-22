@@ -1,9 +1,12 @@
 package br.com.rads.drunkenmaster.home
 
+import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import br.com.rads.drunkenmaster.common.compatTint
 import br.com.rads.drunkenmaster.geocode.PocAddress
 import rads.com.br.drunkenmaster.R
 
@@ -24,6 +27,7 @@ class AddressesAdapter(private val addresses: MutableList<PocAddress>,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val address = addresses[position]
         with(holder.addressTextView) {
+            setCompoundDrawables(compoundDrawables.firstOrNull()?.compatTint(Color.parseColor("#9E9E9E")), null, null, null)
             text = address.fullAddress
             setOnClickListener {
                 addressSelectedListener.addressSelected(address)
