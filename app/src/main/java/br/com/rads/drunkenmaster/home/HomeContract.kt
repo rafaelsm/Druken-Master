@@ -6,7 +6,6 @@ import br.com.rads.drunkenmaster.geocode.PocAddress
 interface HomeContract {
 
     interface View {
-        fun context(): Context
         fun showLoading()
         fun hideLoading()
         fun addressFound(addresses: List<PocAddress>)

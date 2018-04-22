@@ -11,6 +11,7 @@ import br.com.rads.drunkenmaster.common.Extras
 import br.com.rads.drunkenmaster.geocode.PocAddress
 import br.com.rads.drunkenmaster.common.invisible
 import br.com.rads.drunkenmaster.common.visible
+import br.com.rads.drunkenmaster.geocode.GeocodeServiceImpl
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_delivery_address.*
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit
 
 class HomeActivity : AppCompatActivity(), HomeContract.View {
 
-    private val presenter = HomePresenter(this)
+    private val presenter = HomePresenter(this, GeocodeServiceImpl(this))
     private val addressesAdapter = AddressesAdapter(mutableListOf(), presenter)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +42,6 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
                     presenter.searchAddress(it.text().toString())
                 }
     }
-
-    override fun context() = this
 
     override fun showLoading() = progressBar2.visible()
 
