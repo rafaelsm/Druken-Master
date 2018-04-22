@@ -13,7 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="Where are you?"
+        android:text="@string/label_home_title"
         android:textColor="@android:color/black"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -27,7 +27,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="I will use your address to find the fastest delivery option available in your area."
+        android:text="@string/label_home_subtitle"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -51,15 +51,15 @@
         android:inputType="textPostalAddress"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/progressBar2"
+        app:layout_constraintEnd_toStartOf="@+id/search_address_progressBar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@id/textView2"
         tools:layout_editor_absoluteY="115dp"
-        tools:text="asdadadsdfsfsfsdfsfsfsdfsdf12313231313" />
+        tools:text="rua tal" />
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/search_address_progressBar"
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

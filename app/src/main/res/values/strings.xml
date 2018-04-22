@@ -5,4 +5,7 @@
     <string name="label_description">Description</string>
     <string name="activity_title_product_detail">Product Detail</string>
     <string name="unavailable">Not available</string>
+    <string name="cd_product_image">Imagem do produto</string>
+    <string name="label_home_subtitle">I will use your address to find the fastest delivery option available in your area.</string>
+    <string name="label_home_title">Where are you?</string>
 </resources>

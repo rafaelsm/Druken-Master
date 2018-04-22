@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTitle(R.string.activity_title_delivery_address)
         setContentView(R.layout.activity_delivery_address)
 
         recyclerView.apply {
@@ -39,13 +40,15 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
                 .debounce(400, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    presenter.searchAddress(it.text().toString())
+                    if (it.text().isNotEmpty()) {
+                        presenter.searchAddress(it.text().toString())
+                    }
                 }
     }
 
-    override fun showLoading() = progressBar2.visible()
+    override fun showLoading() = search_address_progressBar.visible()
 
-    override fun hideLoading() = progressBar2.invisible()
+    override fun hideLoading() = search_address_progressBar.invisible()
 
     override fun addressNotFound() {
         Toast.makeText(this, "Address not found", Toast.LENGTH_LONG).show()
